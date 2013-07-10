@@ -2,7 +2,7 @@
 import sys
 
 from functools import partial
-from PySide import QtCore, QtGui, QtWebKit
+from PyQt4 import QtCore, QtGui, QtWebKit
 
 
 def _loadFinished(webview, url, ok):
