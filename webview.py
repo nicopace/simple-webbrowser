@@ -27,10 +27,6 @@ def _loadFinished(webview, url, alternativeurl, reply):
     else:
         timeoutSeconds = 60
         QtCore.QTimer.singleShot(timeoutSeconds * 1000, partial(_pageTimeout, webview, url))
-        # timer = QtCore.QTimer()
-        # timer.timeout.connect(partial(_pageTimeout, webview, url))
-        # timer.start(timeoutSeconds * 1000)
-
 
 def _pageTimeout(webview, url):
     webview.load(url)
