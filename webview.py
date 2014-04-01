@@ -7,12 +7,14 @@ from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkRepl
 
 
 def _loadFinished(webview, url, alternativeurl, reply):
+    print "loadfinished"
     requesturl = reply.request().url()
     if requesturl != url:
         if requesturl == alternativeurl:
             # Se supone que la url alternativa es local
-            print "url alternativa cargada, reintentando con la primaria en 5 segs"
+            print "url alternativa cargada, reintentando con la primaria"
             QtCore.QTimer.singleShot(5000, partial(_pageTimeout, webview, url))
+            print "in 5 seconds loading %s" % (url, )
 
         return
 
@@ -27,9 +29,12 @@ def _loadFinished(webview, url, alternativeurl, reply):
     else:
         timeoutSeconds = 60
         QtCore.QTimer.singleShot(timeoutSeconds * 1000, partial(_pageTimeout, webview, url))
+        print "in 60 seconds loading %s" % (url, )
 
 def _pageTimeout(webview, url):
     webview.load(url)
+    print "loading %s" % (url, )
+
 
 def main():
     app = QtGui.QApplication(sys.argv)
